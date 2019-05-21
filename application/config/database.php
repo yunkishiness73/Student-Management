@@ -74,12 +74,56 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => '127.0.0.1:3306',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'agent_railway',
-	'dbdriver' => 'mysqli',
+	'dsn'	=> 'sqlsrv:Server=DESKTOP-NRU7J3G\SQLEVALUATION_1;Database=QLDSV',
+	'hostname' => '',
+	'username' => 'sa',
+	'password' => 'Thaotran17021997',
+	'database' => '',
+	'dbdriver' => 'pdo',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['db2'] = array(
+	'dsn'	=> 'sqlsrv:Server=DESKTOP-NRU7J3G\SQLEVALUATION_2;Database=QLDSV',
+	'hostname' => '',
+	'username' => 'sa',
+	'password' => 'Thaotran17021997',
+	'database' => '',
+	'dbdriver' => 'pdo',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['db3'] = array(
+	'dsn'	=> 'sqlsrv:Server=DESKTOP-NRU7J3G\SQLEVALUATION_3;Database=QLDSV',
+	'hostname' => '',
+	'username' => 'sa',
+	'password' => 'Thaotran17021997',
+	'database' => '',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

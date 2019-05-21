@@ -48,10 +48,18 @@
 
           <li><a><i class="fa fa-edit"></i>Quản lý <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="<?= base_url() ?>Admin_controller/index">Quản Lý Lớp</a></li>
-              <li><a href="<?= base_url() ?>Admin_controller/loadStudentView">Quản Lý Sinh Viên</a></li>
+              <li><a href="<?= base_url() ?>Class_Controller/index">Quản Lý Lớp</a></li>
+              <li><a href="<?= base_url() ?>Student_Controller/index">Quản Lý Sinh Viên</a></li>
               <li><a href="<?= base_url() ?>Admin_controller/loadSubjectView">Quản Lý Môn Học</a></li>
-               <li><a href="<?= base_url() ?>Admin_controller/loadStudentGradeView">Quản Lý Điểm</a></li>
+              <li><a href="<?= base_url() ?>Mark_Controller/index">Quản Lý Điểm</a></li>
+             
+            </ul>
+          </li>
+
+          <li><a><i class="fa fa-edit"></i>In<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="<?= base_url() ?>Student_Controller/loadPrintStudentGradeView">In Điểm</a></li>
+              <li><a href="<?= base_url() ?>Student_Controller/loadPrintStudentView">In Danh Sách Sinh Viên</a></li>
             </ul>
           </li>
 

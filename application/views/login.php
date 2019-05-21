@@ -33,6 +33,12 @@
           <section class="login_content">
             <form method="post" action="<?= base_url() ?>Admin_controller/checkUserAccount">
               <h1>Login Form</h1>
+              <div style="margin-bottom: 15px;">
+                <select name="faculty" class="form-control">
+                    <option value="CNTT">Công Nghệ Thông Tin</option>
+                    <option value="VT">Viễn Thông</option>
+                </select>
+              </div>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required="" name="username" />
               </div>

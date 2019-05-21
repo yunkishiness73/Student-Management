@@ -9,4 +9,5 @@
 <script src="<?= base_url() ?>vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
 <!-- Custom Theme Scripts -->
+ <script src="<?= base_url() ?>build/js/jquery-ui.min.js"></script>
 <script src="<?= base_url() ?>build/js/custom.min.js"></script>

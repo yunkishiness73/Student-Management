@@ -59,28 +59,22 @@
                <div class="form-group">
                  <label class="control-label col-sm-3" for="email">Mã lớp:</label>
                  <div class="col-sm-9">
-                  <input type="email" class="form-control" id="email" disabled>
+                  <input type="email" class="form-control currClassId" id="email" disabled value="<?= $currClassId ?>">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="pwd">Môn học:</label>
                 <div class="col-sm-9"> 
-                  <select class="form-control">
-                    <option value="volvo">lớp 1</option>
-                    <option value="saab">lớp 2</option>
-                    <option value="mercedes">lớp 3</option>
-                    <option value="audi">lớp 4</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="pwd">Học kỳ:</label>
-                <div class="col-sm-9"> 
-                  <select class="form-control">
-                    <option value="volvo">lớp 1</option>
-                    <option value="saab">lớp 2</option>
-                    <option value="mercedes">lớp 3</option>
-                    <option value="audi">lớp 4</option>
+                  <select class="form-control selectedSubject">
+                    <?php if(isset($subjects)) { ?>
+                    <?php foreach ($subjects as $value): ?>
+                      <?php if(isset($currentSuject) && $currentSuject == $value['MAMH']) { ?>               
+                        <option value="<?= $value['MAMH'] ?>" selected ><?= $value['TENMH']?></option>
+                      <?php } else {?>
+                        <option value="<?= $value['MAMH'] ?>"><?= $value['TENMH']?></option>
+                      <?php } ?>
+                    <?php endforeach ?>
+                    <?php } ?>
                   </select>
                 </div>
               </div>
@@ -92,26 +86,42 @@
              <div class="form-group">
               <label class="control-label col-sm-3" for="pwd">Tên lớp:</label>
               <div class="col-sm-9"> 
-                <select class="form-control">
-                  <option value="volvo">lớp 1</option>
-                  <option value="saab">lớp 2</option>
-                  <option value="mercedes">lớp 3</option>
-                  <option value="audi">lớp 4</option>
+                <select class="form-control selectedClass">
+                  <?php if(isset($classes)) { ?>
+                  <?php foreach ($classes as $value): ?>
+                    <?php if(isset($currClassId) && $value['MALOP'] == $currClassId) {  ?>
+                    <option value="<?= $value['MALOP'] ?>" selected><?= $value['TENLOP']?></option>
+                    <?php } else { ?>
+                    <option value="<?= $value['MALOP'] ?>"><?= $value['TENLOP']?></option>
+                    <?php } ?>
+                  <?php endforeach ?>
+                  <?php } ?>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3" for="pwd">Lần thi:</label>
+              <label class="control-label col-sm-3 " for="pwd">Lần thi:</label>
               <div class="col-sm-9"> 
-                <select class="form-control">
-                  <option value="volvo">lần 1</option>
-                  <option value="saab">lần 2</option>
+                <select class="form-control selectedTime">
+                  <?php if(isset($currentTime)) { ?>
+                      <?php if($currentTime == 1) {?>
+                          <option value="1" selected="">1</option>
+                          <option value="2" >2</option>
+                      <?php } else {?>
+                          <option value="1">1</option>
+                          <option value="2" selected>2</option>
+                      <?php } ?>
+                  <?php } else {?>
+                         <option value="1">1</option>
+                          <option value="2">2</option>
+                  <?php } ?>
+                  
                 </select>
               </div>
             </div>
             <div class="form-group" style="text-align: center;">
-              <button class="btn btn-success" >Xác nhận</button>
-              <button class="btn btn-success" style="display: inline-block;">Lưu</button>
+              <button class="btn btn-success btn-submit" >Xác nhận</button>
+            <!--   <button class="btn btn-success btn-edit-mark" >Sửa điểm</button> -->
             </div>
           </div> <!--hết cột phải-->
 
@@ -120,9 +130,11 @@
       </div> 
 
     </div>
-
-    <div class="row student-list">
-      <div class="table-responsive col-sm-12">
+    
+    <?php if(isset($students)) { ?>
+    <?php $data = isset($students) ? $students : $studentsMark ?>
+    <div class="row students-mark" style="width: 70%; margin: auto;">
+      <div class="table-responsive col-sm-12" >
 
        <table class="table">
 
@@ -133,46 +145,62 @@
             <th>Họ</th>
             <th>Tên</th>
             <th>Điểm</th>
-            <th></th>
 
           </tr>
         </thead>
 
-        <tbody class="add-menu-view">
+        <tbody class="add-menu-view" style="">
+          <?php $count = 1; ?>
+          <?php if(isset($studentMarks)) ?>
+          <?php foreach ($data as $val): ?>
+           <tr>
+            <td ><?= $count++; ?></td>
+            <td >
+              <input type="text" name="studentsId" class="txtStudentId form-control show-tg" value="<?= $val['MASV'] ?>" style="display: none;">
+              <span class="" ><?= $val['MASV'] ?></span>
+            </td>
+            <td >
+              <input type="text" class="txtLastName form-control show-tg" value="<?= $val['HO'] ?>" style="display: none;">
+              <span class=""><?= $val['HO'] ?></span>
+            </td>
+            <td >
+              <input type="text" class="txtFirstName form-control show-tg" value="<?= $val['TEN'] ?>" style="display: none;">
+              <span class=""><?= $val['TEN'] ?></span>
+            </td>
+            <?php if(isset($studentsMark)) { ?>
+              <td >
+                <input type="text" name="studentsMark" class="txtStudentMark form-control show-tg" value="<?= $val['DIEM'] ?>" style="display: none; width: 30%;">
+                <span class="hidden-tg"><?= $val['DIEM'] ?></span>
+              </td>
+              <?php } else if(isset($students)) {?>
+                <td style="width: 20%;">
+                <input type="text" name="studentsMark" class="txtStudentMark form-control show-tg" value="<?= $val['DIEM'] ?>" style="width: 100%;">
+                <span class="hidden-tg" style="display: none;"><?= $val['DIEM'] ?></span>
+              </td>
+              <?php } ?>
 
-         <tr>
-          <td><span class="hidden-tg" >1</span></td>
-          <td >
-            <input type="text" class="ten_sp form-control show-tg" value="" style="display: none;">
-            <span class="hidden-tg" >51603170</span>
-          </td>
-          <td >
-            <input type="text" class="donvitinh_sp form-control show-tg" value="" style="display: none;">
-            <span class="hidden-tg ">Lung</span>
-          </td>
-          <td >
-            <input type="text" class="gia_sp form-control show-tg" value="" style="display: none;">
-            <span class="hidden-tg ">Thị Linh</span>
-          </td>
-
-          <td >
-            <input type="text" class="gia_sp form-control show-tg" value="" style="display: none;">
-            <span class="hidden-tg ">10</span>
-          </td>
-
-          <td>
-           <a data-href="" class="btn btn-warning btn-edit" style="display: inline-block; height: 34px; "><i class="fa fa-pencil"></i></a>
-           <a data-href="" class="btn btn-success btn-save"  style="display: none"><i class="fa fa-floppy-o"></i></a>
-         </td>
-       </tr>
+            <!-- <td>
+             <a data-href="" class="btn btn-warning btn-edit" style="display: inline-block; height: 34px; "><i class="fa fa-pencil"></i></a>
+             <a data-href="" class="btn btn-success btn-save"  style="display: none"><i class="fa fa-floppy-o"></i></a>
+           </td> -->
+         </tr>
+       <?php endforeach ?>
      </tbody>
    </table>
 
    <!-- hết cột trái -->
-
+   
 
  </div>
+
+ <div class="row" style="float: right; clear: both; width: 15%; margin-right: 15px;">
+    <a href="#" class="btn btn-danger btn-save-changed" style="width: 100%;">Lưu thay đổi</a>
+ </div>
+
+
 </div>
+
+<?php } ?>
 </div>
 
 <!-- footer content -->
@@ -190,6 +218,75 @@
 
   $(function() {
 
+    $('body').on('change', '.selectedClass', function(event) {
+      event.preventDefault();
+      classId = $(this).val();
+      $(".currClassId").val(classId);
+    });
+
+    $('body').on('click', '.btn-submit', function(event) {
+      event.preventDefault();
+
+      classId = $(".selectedClass").val();
+      subjectId = $(".selectedSubject").val();
+      time = $(".selectedTime").val();
+      console.log("classId " + classId);
+      console.log("subjectId " + subjectId);
+      console.log("time " + time);
+      path = link + "Mark_Controller/getStudentsMark?class="+classId+"&subject="+subjectId+"&time="+time;
+      window.open(path, "_self");
+
+
+    });
+
+    $('body').on('click', '.btn-edit-mark', function(event) {
+      event.preventDefault();
+      $('.txtStudentMark').show();
+      $('.hidden-tg').hide();
+    });
+
+    $('body').on('click', '.btn-save-changed', function(event) {
+      event.preventDefault();
+
+      let flag = true;
+
+      var studentsId = $('input[name^=studentsId]').map(function(idx, elem) {
+        return $(elem).val();
+      }).get();
+
+      var studentsMark = $('input[name^=studentsMark]').map(function(idx, elem) {
+
+        if($(elem).val().trim().length == 0) 
+           flag = false;
+        
+        return $(elem).val();
+      }).get();
+
+      if(flag) {
+        $.post(link + 'Mark_Controller/insertStudentsMarkByAjax', {studentsId: studentsId, studentMarks: studentsMark, subjectId: $(".selectedSubject").val(), times: $(".selectedTime").val()}, function(data, textStatus, xhr) {
+          if(data == 'true') {
+            alert("Inserted Students Mark Successfully");
+          } else {
+            alert("Inserted Students Mark failed");
+          }
+          location.reload();
+
+        });
+      } else {
+         alert("Mark must be from 0 to 10 !");
+      }
+
+      console.log(studentsId);
+      console.log(studentsMark);
+      console.log($(".selectedTime").val());
+      console.log($(".selectedSubject").val());
+
+
+      // console.log($(".txtStudentMark").val());
+      // console.log($(".txtStudentId").val());
+
+
+    });
 
 
 

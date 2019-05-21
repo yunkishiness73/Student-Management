@@ -1474,6 +1474,11 @@ abstract class CI_DB_driver {
 	 */
 	protected function _insert($table, $keys, $values)
 	{
+		foreach ($values as $key => $value) {
+			if(substr($value, 0, 1) == "'") {
+				$values[$key] = "N". $value;
+			}
+		}
 		return 'INSERT INTO '.$table.' ('.implode(', ', $keys).') VALUES ('.implode(', ', $values).')';
 	}
 
@@ -1520,6 +1525,11 @@ abstract class CI_DB_driver {
 	 */
 	protected function _update($table, $values)
 	{
+		foreach ($values as $key => $value) {
+			if(substr($value, 0, 1) == "'") {
+				$values[$key] = "N". $value;
+			}
+		}
 		foreach ($values as $key => $val)
 		{
 			$valstr[] = $key.' = '.$val;

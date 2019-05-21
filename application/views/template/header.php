@@ -12,4 +12,5 @@
 <link href="<?= base_url() ?>vendors/nprogress/nprogress.css" rel="stylesheet">
 <link href="<?= base_url() ?>vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 <link href="<?= base_url() ?>vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+<link href="<?= base_url() ?>build/css/jquery-ui.min.css" rel="stylesheet">
 <link href="<?= base_url() ?>build/css/custom.min.css" rel="stylesheet">
